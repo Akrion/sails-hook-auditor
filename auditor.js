@@ -1,7 +1,7 @@
 /*
- * Audit hook which writes to the ActivityLog for both requests and responses.
+ * Audit hook which for both requests and responses.
  * Note that 
- * The request/response MUST contain an audit object as part of your JSON:
+ * The request/response MUST contain an audit object or whatever key you specify in clearResponseAuditOnClient config as part of your JSON:
 
     ... YOUR JSON REQUEST/RESPONSE OBJECT BEGIN...
 
