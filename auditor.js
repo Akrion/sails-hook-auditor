@@ -23,19 +23,8 @@ var _  = require('lodash');
 
 module.exports = function(sails) {
     // Service function to create the actual audit record in the db
-    function createAuditModel(req, params){
-        var Models = sails.mongols,
-            audit  =        _.extend(params, {
-            user:           _.get(req, 'user._id', null),
-            userProfile:    _.get(req, 'user.profile', null),
-            customer:       _.get(req, 'customer._id', null),
-            customerName:   _.get(req, 'customer.name', null)
-        });
-
-        // Create the audit model
-        var model = new Models.ActivityLog(audit);
-
-        model.save();
+    function customLogicFn(req, params){
+        // YOUR CUSTOM LOGIC GOES HERE!
     }
 
     return {
@@ -55,7 +44,7 @@ module.exports = function(sails) {
 
                     // Check of the audit object exists
                     if (requestParameters[auditKey])        
-                        createAuditModel(req, requestParameters[auditKey]);  // Record audit data                    
+                        customLogicFn(req, requestParameters[auditKey]);  // Record audit data                    
 
                     // --- RESPONSES ---
                     var send = res.send;
@@ -66,7 +55,7 @@ module.exports = function(sails) {
 
                         // Check of the audit object exists
                         if (auditObject) {        
-                            createAuditModel(req, auditObject);  // Record audit data
+                            customLogicFn(req, auditObject);  // Record audit data
 
                             if (sails.config.auditor.clearResponseAuditOnClient)
                                 if (_.has(arguments, '0.' + auditKey))
