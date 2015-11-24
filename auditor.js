@@ -1,5 +1,5 @@
 /*
- * Audit hook which for both requests and responses.
+ * Audit hook for intercepting both requests and responses and looking for a custom audit object.
  * Note that 
  * The request/response MUST contain an audit object or whatever key you specify in clearResponseAuditOnClient config as part of your JSON:
 
